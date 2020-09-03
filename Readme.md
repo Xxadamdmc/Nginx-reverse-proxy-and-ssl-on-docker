@@ -4,6 +4,8 @@ En este post vamos a ver como crear un servidor proxy inverso y la automatizar l
 
 ### Como funciona:
 
+<img src="./diagrama.png">
+
 Tenemos varios contenedores corriendo, un servidor nginx cada uno  (contenedor1) www.web1.com, (contenedor2) www.web2.com,(contenedor3) www.web3.com
 NGINX-Proxy tiene acceso a la api de docker, asi cada vez que es creado o eliminado un contender actualiza la tabla de contenedores.
 En cada contenedor usaremos las variables de entorno VIRTUAL_HOST y LETSENCRIPT_HOST:
@@ -18,8 +20,6 @@ cada vez que nuestro nginx-proxy reciba la peticion http/https wwww.web1.com red
 - LETSENCRIPT_HOST: el contenedor letsencript tambien tiene acceso a la api de docker, con la cual puede ver que contenedores tienen la variable LETSENCRIPT_HOST y genera  automaticamente certificados ssl y los valida con letsencript para que sean 100% seguros (de confianza), asi cada 60 minutos (1 hora) verifica que los certificados esten bien y si estan cerca de caducar los renova automaticamente.
 
 > WARNING : **Para este paso hace falta tener el nombre de dominion externalizado (servidor DNS) apuntando a nuestra ip publica, si no no podra validar los certificados**
-
-<img src="./diagrama.png">
 
 # Ejecturar
  > CMD : **docker-compose up -d**

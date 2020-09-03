@@ -1,0 +1,44 @@
+version: '3'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - D:\projects\rsi\docker\docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    environment:
+      - DOCKER_HOST=tcp://10.1.240.22:2375
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - D:\projects\rsi\docker\docker.sock:/var/run/docker.sock:ro
+      
+  www:
+      image: nginx
+      restart: always
+      expose:
+        - "80"
+      volumes:
+        - D:\projects\rsi\docker\nginx-reverse-proxy-letsencript\www1:/usr/share/nginx/html:ro
+      environment:
+        - VIRTUAL_HOST=adam.hachem.com,www.adam.hachem.com
+        - LETSENCRYPT_HOST=adam.hachem.com,www.adam.hachem.com
+        - LETSENCRYPT_EMAIL=adamfullstackdev@gmail.com
+volumes: 
+  certs:
+  html:
+  vhostd:

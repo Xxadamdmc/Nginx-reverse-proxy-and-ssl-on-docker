@@ -19,6 +19,7 @@ cada vez que nuestro nginx-proxy reciba la peticion http/https wwww.web1.com red
 
 > WARNING : **Para este paso hace falta tener el nombre de dominion externalizado (servidor DNS) apuntando a nuestra ip publica, si no no podra validar los certificados**
 
+<img src="./diagrama.png">
 
 # Ejecturar
  > CMD : **docker-compose up -d**

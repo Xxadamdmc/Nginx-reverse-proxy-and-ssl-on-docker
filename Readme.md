@@ -12,7 +12,7 @@ En cada contenedor usaremos las variables de entorno VIRTUAL_HOST y LETSENCRIPT_
 
 - VIRTUAL_HOST: Esta variable la usa nginx-proxy para redirigir el trafico al contenedor según el nombre de dominio de la petición
 
-- LETSENCRIPT_HOST: el contenedor letsencript también tiene acceso a la api de docker, con la cual puede ver que contenedores tienen la variable LETSENCRIPT_HOST y genera  automáticamente certificados ssl y los valida con letsencript para que sean 100% seguros (de confianza), asi cada 60 minutos (1 hora) verifica que los certificados estén bien y si están cerca de caducar o caducados los renovará automáticamente.
+- LETSENCRIPT_HOST: el contenedor letsencript también tiene acceso a la api de docker, así puede ver que contenedores tienen la variable LETSENCRIPT_HOST y generar  automáticamente certificados ssl y los valida con los servidores letsencript para que sean seguros (de confianza), asi cada 60 minutos (1 hora) verifica que los certificados estén bien y si están cerca de caducar o caducados los renovará automáticamente.
 
 ### Ejemplo: 
 

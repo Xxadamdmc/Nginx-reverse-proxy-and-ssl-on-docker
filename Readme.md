@@ -16,7 +16,7 @@ En cada contenedor usaremos las variables de entorno VIRTUAL_HOST y LETSENCRIPT_
 
 ### Ejemplo: 
 
-tenemos expuesto el servidor nginx-proxy en el puerto 80, usaremos el nombre de dominio www.web1.com, el contenedor 1 (con la la variable VIRTUAL_HOST=wwww.web1.com).
+Tenemos expuesto el servidor nginx-proxy en el puerto 80, usaremos el nombre de dominio www.web1.com, el contenedor 1 (con la la variable VIRTUAL_HOST=wwww.web1.com).
 cada vez que nuestro nginx-proxy reciba la petición http/https wwww.web1.com redirigirá el trafico al contenedor 1.
 
 

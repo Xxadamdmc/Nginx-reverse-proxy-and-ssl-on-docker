@@ -7,12 +7,10 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - D:\projects\rsi\docker\docker.sock:/tmp/docker.sock:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
       - certs:/etc/nginx/certs:ro
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-    environment:
-      - DOCKER_HOST=tcp://10.1.240.22:2375
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -25,7 +23,7 @@ services:
       - certs:/etc/nginx/certs:rw
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - D:\projects\rsi\docker\docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       
   www:
       image: nginx
@@ -33,11 +31,22 @@ services:
       expose:
         - "80"
       volumes:
-        - D:\projects\rsi\docker\nginx-reverse-proxy-letsencript\www1:/usr/share/nginx/html:ro
+        - ${PATH1}:/usr/share/nginx/html:ro
       environment:
-        - VIRTUAL_HOST=adam.hachem.com,www.adam.hachem.com
-        - LETSENCRYPT_HOST=adam.hachem.com,www.adam.hachem.com
-        - LETSENCRYPT_EMAIL=adamfullstackdev@gmail.com
+        - VIRTUAL_HOST=${HOSTNAMES} #EXAMPLE: web1.com,www.web1.com
+        - LETSENCRYPT_HOST=${HOSTNAMES} #EXAMPLE: web1.com,www.web1.com
+        - LETSENCRYPT_EMAIL=${EMAIL} # YOUR EMAIL
+  www2:
+      image: nginx
+      restart: always
+      expose:
+        - "80"
+      volumes:
+        - ${PATH2}:/usr/share/nginx/html:ro
+      environment:
+        - VIRTUAL_HOST=${HOSTNAMES2} #EXAMPLE: web2.com,www.web2.com
+        - LETSENCRYPT_HOST=${HOSTNAMES2} #EXAMPLE: web2.com,www.web2.com
+        - LETSENCRYPT_EMAIL=${EMAIL} # YOUR EMAIL
 volumes: 
   certs:
   html:

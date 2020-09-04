@@ -22,5 +22,8 @@ cada vez que nuestro nginx-proxy reciba la petición http/https wwww.web1.com re
 
 > WARNING : **Para este paso hace falta tener el nombre de dominion externalizado (servidor DNS) apuntando a nuestra ip publica, si no no podrá validar los certificados desde los servidores de letsencript**
 
+# Importante
+- Ver y completar docker-compose.yaml
+
 # Ejecutar
  > CMD : **docker-compose up -d**
